@@ -1,0 +1,30 @@
+\documentclass[%
+  paper=a4,
+  fontsize=12pt,
+  parskip=half,
+  headheight=32pt,
+  DIV=11
+]{scrartcl}
+\usepackage[english, ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{bookmark}
+\usepackage{array}
+
+% Allow direct copy&paste from the pdf
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\PassOptionsToPackage{colorlinks=true,linkcolor=blue}{hyperref}
+%\usepackage[colorlinks=true,linkcolor=blue]{hyperref}
+
+%Header and Footer
+\usepackage[headsepline=0.4pt,plainfootsepline]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\clearpairofpagestyles
+
+\ihead{Reverse Engineering}
+\ohead{\includegraphics[width=2cm]{../img/HM_Logo.jpg}}
+\usepackage{lastpage}
+\cfoot{Seite \pagemark\hspace{0.9pt} von \hspace{0.9pt}\pageref{LastPage}}
