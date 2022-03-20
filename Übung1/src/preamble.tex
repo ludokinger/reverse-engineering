@@ -1,16 +1,23 @@
-\documentclass[%
+\documentclass[
   paper=a4,
   fontsize=12pt,
   parskip=half,
   headheight=32pt,
-  DIV=11
+  DIV=12,
+  BCOR=3mm
 ]{scrartcl}
+
 \usepackage[english, ngerman]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{bookmark}
 \usepackage{array}
+%usepackage{showframe} % to see the frame of the pdf
+\usepackage[a4,center,cam]{crop} % set size of page frame. Synergy with Koma-Script
+
+% Allows adding inline-code
+\usepackage{listings}
 
 % Allow direct copy&paste from the pdf
 \usepackage[T1]{fontenc}
@@ -19,7 +26,7 @@
 \PassOptionsToPackage{colorlinks=true,linkcolor=blue}{hyperref}
 %\usepackage[colorlinks=true,linkcolor=blue]{hyperref}
 
-%Header and Footer
+% Header and Footer
 \usepackage[headsepline=0.4pt,plainfootsepline]{scrlayer-scrpage}
 \pagestyle{scrheadings}
 \clearpairofpagestyles
