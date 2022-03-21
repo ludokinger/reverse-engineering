@@ -42,7 +42,7 @@
 \section*{Aufgabe 1 - REMnux installieren}
 \section*{Aufgabe 2 - REMnux Tool Check}
 
-\subsection*{a) Aus welchen Quellen kann ein Tool von REMnux stammen}
+\subsection*{a) Aus welchen Quellen kann ein Tool von REMnux stammen?}
 Remnux kann wie jede andere Linux-Distro Software aus den angegebenen Quellen installieren.
 (abgesehen von sonstigen Paketmanagern, wie \textit{snap, flatpack, AppImage})
 Folgender Befehl zeigt die Repos an:
@@ -55,7 +55,7 @@ Es fällt auf, dass ein spezielles Remnux Repo vorhanden ist namens:
 \mbox{\textit{http://ppa.launchpad.net/remnux/stable/ubuntu}}. Diese Repo wurde durch \textit{remnux.sls} hinzugefügt\footnote{\url{https://github.com/REMnux/salt-states/blob/master/remnux/repos/remnux.sls}}
 
 Die Besonderheit bei Remnux ist, dass der \textit{Remnux Installer} automatisch Software installiert, konfiguriert und aktualisiert.
-Die Eigenschaften von Software, wie Download-Quelle, Installation Path, Hashnummer, Rechte, Abhängigkeiten und Configs, werden durch sogenannte \textit{salt-state Files} bestimmt.
+Die Eigenschaften von Software, wie Download-Quelle, Installation Path, Hashnummer, Rechte, Abhängigkeiten und Configs, werden durch sogenannte \textit{state files} bestimmt.
 Diese Files befinden sich auf GitHub und werden durch den \textit{Remnux Installer} geladen.
 
 Remnux nutzt gemäß den Remnux Docs\footnote{\url{https://docs.remnux.org/behind-the-scenes/technologies/debian-packages}} folgende Installationsquellen:
@@ -65,6 +65,44 @@ Remnux nutzt gemäß den Remnux Docs\footnote{\url{https://docs.remnux.org/behin
     \item npm
     \item apt Repos
 \end{itemize}
+
+\subsection*{b) Welche Tools stammen nicht aus Open Source Quellen?}
+
+Das Github Repo wurde im Ordner \textit{/Documents/} gecloned.
+
+Lösung mit \textit{grep}:
+
+\begin{lstlisting}
+$ grep -r --include="*.sls"
+> -Eio "source: (http|https)://[a-zA-Z0-9./?=_%:-]*"
+> /home/remnux/Documents/salt-states/remnux/
+> | grep -v "github"
+> | cut -d'/' -f10
+> | uniq -u
+\end{lstlisting}
+
+Output:
+\begin{lstlisting}
+    snapshots.mitmproxy.org
+    www.netresec.com
+    didierstevens.com
+    www.nowrap.de
+    bitbucket.org
+    www.mitec.cz
+    www.nowrap.de
+    www.cert.at
+    www.netresec.com
+    www.didierstevens.com
+    radare.mikelloc.com
+\end{lstlisting}
+
+Erklärung:
+
+Es wird \textit{command-chaining} verwendet.
+Das Tool \textit{grep} sucht mittels \textit{regex} nach allen URLs in allen \textit{.sls} files.
+Ergebnisse, die den String \textit{github} beinhalten, werden ausgeschlossen.
+Der \textit{cut} Befehl filtert beim Output die Domains heraus.
+Der \textit{uniq} Befehl eliminiert alle doppelten Ergebnisse.
 
 \section*{Aufgabe 3 - File Classification}
 
