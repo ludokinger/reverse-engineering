@@ -72,7 +72,7 @@ Das Github Repo wurde im Ordner \textit{/Documents/} gecloned.
 
 Lösung mit \textit{grep}:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=bash]
 $ grep -r --include="*.sls"
 > -Eio "source: (http|https)://[a-zA-Z0-9./?=_%:-]*"
 > /home/remnux/Documents/salt-states/remnux/
@@ -192,13 +192,27 @@ Yara file (objdump -drS aus .text) == Output \textit{bin 1207}:
 
 \subsection*{a) Dump Analyse}
 
-Betrachtung im Hex-Editor, da sonst nicht lesbar.
-Die Entropie ist sehr hoch. Vermutlich ist die Firmware komprimiert oder verschlüsselt.
-Binwalk identifiziert ARM 16bit (thumb) instructions.
+Die Entropie gibt Aufschluss darüber, dass die Firmware komprimiert und/oder verschlüsselt.
+Die Schwachstelle bei der XOR-Verschlüsselung ist diese Formel:
+\begin{lstlisting}[language=Python]
+    x^0 = x
+\end{lstlisting}
+
+Es lässt sich somit das Muster - \textit{88 44 A2 D1 68 B4 5A 2D} - finden.
+
+Über den Hexeditor wird die entschlüsselte Datei als \textit{decrypt.bin} abgespeichert.
 
 \subsection*{b) Extrahieren}
 
+Das Squashfs Filesystem ist xz compressed und 5739914 bytes groß.
+\begin{lstlisting}
+    $ binwalk decrypt.bin
+    $ dd if=decrypt.bin skip=1900672 of=linux bs=1
+    $ unsqushfs linux
+\end{lstlisting}
 
-\subsection*{c) Gerätetyp und Version des FS}
+Mit dem \textit{dd} Befehl wird die Filesystem Partition herausgeschnitten und schließlich mit unsquashfs decompressed.
+
+\subsection*{c) Gerätetyp und Version}
 
 \end{document}
