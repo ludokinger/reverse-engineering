@@ -104,6 +104,29 @@ Ergebnisse, die den String \textit{github} beinhalten, werden ausgeschlossen.
 Der \textit{cut} Befehl filtert beim Output die Domains heraus.
 Der \textit{uniq} Befehl eliminiert alle doppelten Ergebnisse.
 
+\newpage
+
+Lösung mit \textit{Yara}:
+
+\begin{figure} [!ht]
+\centering
+\includegraphics[width=15cm]{../img/yara.PNG}
+\end{figure}
+
+Das Github Repo \textit{salt-states-master} wurde in den Ordner \textit{/home/remnux/Desktop/uebung1/} geklont.
+
+Die Regel \textit{not\_open\_source.yara} wurde in der Kommandozeile wie folgt ausgeführt:
+
+\begin{lstlisting}[language=bash]
+$ yara -s -r
+> not_open_source.yara
+> /home/remnux/Desktop/uebung1/salt-states-master
+\end{lstlisting}
+
+Die Regel wird rekursiv auf alle Dateien im geklonten Github Repo angewandt (primär \textit{.sls} Dateien). Es werden alle Dateien gefiltert in denen eine Source-URL (\textit{\$url}) enthalten ist, die nicht den String \textit{github.com} (\textit{\$gh}) enthält.
+
+\newpage
+
 \section*{Aufgabe 3 File Classification}
 
 \subsection*{a) samples.zip - not stripped}
