@@ -229,13 +229,33 @@ Es kommt raus, dass das Passwort im \textit{rdi} Register lag, welches mit folge
 %%%%%%%%%%%%%%
 \section*{Aufgabe 3 ELF Reversing}
 
-\subsection*{a)}
+\subsection*{a) Entry Point}
+
+\begin{lstlisting}[language=bash]
+    $ readelf -h Execme
+\end{lstlisting}
+
+Es handelt sich um eine:
+\begin{itemize}
+    \item 32 bit ELF File
+    \item Header size 52 bytes
+    \item Entry Point 0x804887f
+    \item Section Header komplett stripped
+\end{itemize}
 
 \subsection*{b)}
 
+Der Grund für die Fehlermeldungen sind in erster Linie falsche Angaben im Header. Der Header
+gibt an, dass Section Headers vorhanden seien. Dies entspricht nicht der Wahrheit.
+
 \subsection*{c)}
 
+Im ELF Header werden alle Referenzen, die auf einen Section Header zeigen, mit \textit{0} überschrieben.
+Dies wird über das Tool namens hexedit bewerkstelligt.
+
 \subsection*{d)}
+
+
 
 \subsection*{e)}
 
