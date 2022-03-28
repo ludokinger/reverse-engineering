@@ -139,6 +139,22 @@ Im Hexeditor werden die entsprechenden Bytes auf \textit{0x401170} abgeändert.
 
 Nun lässt sich die ELF Datei ausführen ohne Fehler.
 
+Darstellung mittels Ghidra (Abbildung 1 \& Abbildung 2):
+
+\begin{figure} [!ht]
+\centering
+\includegraphics[width=13.5cm]{../img/Picture1.PNG}
+\caption{Beginn der \textit{.text} Section.}
+\end{figure}
+
+\begin{figure} [!ht]
+\centering
+\includegraphics[width=13.5cm]{../img/Picture2.PNG}
+\caption{Ausschnitt der Main-Methode.}
+\end{figure}
+
+\newpage
+
 \subsection*{b)}
 
 Mittels folgendem Befehl werden verlinkte Libaries angezeigt.
@@ -223,6 +239,9 @@ Es kommt raus, dass das Passwort im \textit{rdi} Register lag, welches mit folge
     $ (gdb) x/s 0x4040a0
 \end{lstlisting}
 
+Das Password im Klartext lautet: \textit{password}
+
+Zugehöriger MD5-Hash: \textit{5f4dcc3b5aa765d61d8327deb882cf99}
 
 %%%%%%%%%%%%%%
 % Aufgabe 3  %
