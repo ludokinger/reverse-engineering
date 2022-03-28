@@ -6,6 +6,7 @@
 
 # Anmerkungen
 ## 24.03.22
+
 Ich habe PDFs in *.gitignore* aufgenommen, damit die neu generierte PDF nicht ständig auf GitHub hochgeladen wird.
 ---
 
@@ -21,7 +22,7 @@ Innerhalb des Ordners **/ÜbungX** gibt es:
 # Gitignore
 Damit nicht der ganze Latex Müll auf GitHub landet, temp. Dateien bitte in *.gitignore* angeben.
 
-# Wenn du keine Nachrichten mehr über alte Übungsaufgaben erhalten möchtest, dann benutze folgenden Befehl:
-'''console
+## Wenn du keine Nachrichten mehr über alte Übungsaufgaben erhalten möchtest, dann benutze folgenden Befehl:
+```console
 $ git update-index --assume-unchanged <filename>
-'''
+```
