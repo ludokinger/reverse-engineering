@@ -1,0 +1,104 @@
+%%%%%%%%%%%%%%%%%%%
+% Import Setting  %
+%%%%%%%%%%%%%%%%%%%
+\include{preamble.tex}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%
+% Titelseite  %
+%%%%%%%%%%%%%%%
+\begin{titlepage}
+    \newcommand{\HRule}{\rule{\linewidth}{0.35mm}} % Defines a new command for the horizontal lines
+
+    \center% Center everything on the page
+
+    \textsc{\LARGE Reverse Engineering}\\[0.7cm]
+
+    \begin{figure} [!ht]
+        \centering
+        \includegraphics[width=5cm]{../img/HM_Logo.jpg}
+    \end{figure}
+
+    \textsc{\Large Übung 1 - Gruppe 3}\\[0.7cm]
+
+    \HRule
+
+    \begin{tabular}{*{3}{>{\centering}p{.25\textwidth}}}
+        Ludwig Karpfinger \tabularnewline
+        \url{ludwig.karpfinger@hm.edu}
+    \end{tabular}\par
+    \HRule
+
+    \textsc{}\\[0.3cm]
+
+    \let\endtitlepage\relax
+
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aufgaben ab hier einfügen  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Aufgabe 1 Unsigned LEB128 encoding}
+
+LEB128 ist ein Encoding und wird zur compression benutzt.
+
+High Bits sind wichtig wegen der Reihenfolge
+
+\subsection*{1a) Unsigned LEB128 }
+
+\begin{lstlisting}[]
+    1. 543210 (dezimal) = 10000100100111101010 (binary) - convert
+    2. 100001 0010011 1101010 - in 7er Gruppen aufteilen
+    3. {0}100001 0010011 1101010 - Padding hinzuegen
+    4. {0}0100001 {1}0010011 {1}1101010 - High Bits setzen
+    5.   0x21        0x93       0xEA    - In Hexa umrechnen
+    6. EA9321 - fertig
+\end{lstlisting}
+
+\subsection*{1b) ULEB128 to decimal}
+
+\begin{lstlisting}[]
+    1. d4e63a = 0xd4 0xe6 0x3a - Hex Umwandlung
+    2. 0x3a 0xe6 0xd4 - sortieren
+    3. 00111010 11100110 11010100 - umwandeln in Bits
+    4. 0111010 1100110 1010100 - High Bits abziehen
+    5. 963412 - umwandeln in dezimal
+\end{lstlisting}
+
+\subsection*{1c) Unsigned LEB128}
+
+\begin{lstlisting}[]
+    1. 186 (dezimal) = 10111010 (binary)
+    2. 1 0111010
+    3. 0000001 0111010
+    4. 00000001 10111010
+    5. 0x01      0xBA
+    6. BA01
+\end{lstlisting}
+
+\section*{Aufgabe 2 Android Crackme}
+
+\begin{enumerate}
+    \item \textit{.apk file} in jadx-gui geöffnet.
+    \item Manifest -> activity -> = Entry-Point
+    \item Die Klasse \textit{MainActivity} wurde als Startpunkt ausfindig gemacht
+    \item Flag \textit{5ecr3t} entdeckt
+\end{enumerate}
+
+
+
+\section*{Aufgabe 3 Assembler Programmierung}
+
+\subsection*{3a)}
+
+\subsection*{3b)}
+
+\subsection*{3c)}
+
+
+\section*{Aufgabe 4 Assembler Reversing}
+
+
+
+\end{document}
